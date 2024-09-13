@@ -7,6 +7,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+route::resource('posts', PostController::class);
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
