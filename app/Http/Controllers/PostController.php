@@ -12,7 +12,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+       $posts = Post::all();
+       return view('posts.index', ['posts' => $posts]);
     }
 
     /**
@@ -22,7 +23,11 @@ class PostController extends Controller
     {
         return view('posts.create');
     }
-
+    
+    public function createComent()
+        {
+            return view('posts.show');
+        }
     /**
      * Store a newly created resource in storage.
      */
@@ -39,15 +44,16 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+       return view('posts.show', ['post' => $post]);
     }
-
+    
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(Post $post)
     {
-        //
+        return view('posts.edit', ['post' => $post]);
+        
     }
 
     /**
@@ -55,7 +61,12 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $data = $request->all();
+        $data['user_id'] = 1;
+        // post::create($data);
+        $post->update($data);
+
+        return redirect()->route('posts.index');
     }
 
     /**
@@ -63,6 +74,8 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+         return redirect()->route('posts.index');
     }
+    
 }

@@ -8,7 +8,7 @@ Route::get('/', function () {
 });
 
 route::resource('posts', PostController::class);
-
+route::resource('coment', PostController::class);
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
